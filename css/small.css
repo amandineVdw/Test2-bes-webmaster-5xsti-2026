@@ -1,0 +1,586 @@
+/* =================================
+   SMALL — base mobile (toujours chargé)
+   Tout ce fichier s'applique à tous les écrans.
+   medium.css écrase à partir de 681px.
+   large.css écrase à partir de 1025px.
+   ================================= */
+
+
+/* =================================
+   POLICES IMPORTÉES
+   ================================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+
+/* =================================
+   VARIABLES
+   ================================= */
+:root {
+  --color-primary  : #2c3e50;
+  --color-accent   : #3498db;
+  --color-bg       : #ffffff;
+  --color-light    : #f8f9fa;
+  --color-text     : #333333;
+  --font-main      : 'Inter', sans-serif;
+  --max-width      : 1200px;
+  --gap            : 1.5em;
+  --padding-section: 3em 1.2em;
+}
+
+
+/* =================================
+   GÉNÉRAL
+   ================================= */
+html {
+  min-width: 320px;
+}
+
+body {
+  font-family: var(--font-main);
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  color: var(--color-primary);
+}
+
+p {
+  font-size: 1em;
+  line-height: 1.7;
+  margin-bottom: 1em;
+}
+
+
+/* =================================
+   TYPOGRAPHIE — hiérarchie mobile
+   ================================= */
+h1 {
+  font-size: 1.8em;
+  margin-bottom: 0.5em;
+}
+
+h2 {
+  font-size: 1.5em;
+  margin-bottom: 0.4em;
+}
+
+h3 {
+  font-size: 1.15em;
+  margin-bottom: 0.4em;
+}
+
+
+/* =================================
+   WRAPPER — macro grid
+   Header absolu = hors du flux normal
+   ================================= */
+#wrapper {
+  display: grid;
+  min-height: 100vh;
+  gap: 0;
+  grid-template-rows: 1fr auto;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "main"
+    "footer";
+}
+
+main {
+  grid-area: main;
+}
+
+footer {
+  grid-area: footer;
+}
+
+
+/* =================================
+   SKIP LINK — accessibilité
+   ================================= */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--color-primary);
+  color: #fff;
+  padding: 0.5em 1em;
+  z-index: 9999;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+
+/* =================================
+   HEADER — position absolue sur le hero
+   Transparente · défile avec la page
+   ================================= */
+header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2em 1.5em;
+  background: transparent;
+}
+
+/* Logo mobile — à gauche */
+#logo {
+  flex-shrink: 0;
+}
+
+#logo img {
+  max-height: 36px;
+}
+
+/* Burger */
+#burger {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.6em;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+/* Nav — cachée mobile, ouverte via le burger */
+nav#navprinc {
+  display: none;
+  width: 100%;
+  order: 3;
+  margin-top: 0;
+}
+
+/* Nav ouverte — fond sombre derrière les liens */
+body.nav-open nav#navprinc {
+  display: flex;
+  background: rgba(0, 0, 0, 0.75);
+  padding: 1.5em;
+}
+
+nav#navprinc ul {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  gap: 1em;
+  list-style: none;
+}
+
+nav#navprinc li a {
+  color: #fff;
+  font-size: 1em;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: color 0.3s ease;
+}
+
+nav#navprinc li a:hover {
+  color: var(--color-accent);
+}
+
+nav#navprinc li a[aria-current="page"] {
+  color: var(--color-accent);
+}
+
+
+/* =================================
+   HERO — plein écran avec image de fond
+   ================================= */
+#hero {
+  min-height: 100vh;
+  background: url('../images/header.jpg') center center / cover no-repeat;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+/* Overlay sombre sur l'image */
+#hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 0;
+}
+
+#hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Accroche hero — centrée V+H */
+#accroche {
+  position: absolute;
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  width: 88%;
+}
+
+#accroche h1 {
+  font-size: 1.6em;
+  font-weight: 600;
+  line-height: 1.6;
+  margin-top: 4em;
+  margin-bottom: 1.2em;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Bouton CTA — animation pulse au chargement */
+#accroche .btn {
+  animation: ctaPulse 2s 0.5s ease infinite;
+}
+
+/* 3 blocs d'info sous le bouton CTA */
+.hero-blocs {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5em;
+  margin-top: 6em;
+  padding-top: 1.5em;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  width: 100%;
+}
+
+.hero-bloc {
+  text-align: center;
+}
+
+.hero-bloc h3 {
+  color: #fff;
+  margin-bottom: 0.4em;
+}
+
+.hero-bloc p {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0;
+}
+
+
+/* =================================
+   MAIN — sections
+   ================================= */
+main section {
+  padding: var(--padding-section);
+}
+
+/* Sections paires — fond légèrement grisé */
+main section:nth-of-type(even) {
+  background: var(--color-light);
+}
+
+
+/* ---------------------------------
+   CONTENU 1 — 3 articles avec image
+   --------------------------------- */
+#contenu1 article {
+  text-align: left;
+  padding: 1.5em 1em;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.3s ease;
+}
+
+#contenu1 article:hover {
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+}
+
+#contenu1 figure img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  margin-bottom: 1.5em;
+}
+
+#contenu1 p {
+  margin-bottom: 0.1em;
+}
+
+
+/* ---------------------------------
+   GALERIE — 6 images en grille
+   --------------------------------- */
+#galerie figure {
+  overflow: hidden;
+}
+
+#galerie img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+#galerie img:hover {
+  filter: grayscale(0%);
+  transform: scale(1.03);
+}
+
+
+/* ---------------------------------
+   CTA — image de fond + titre + bouton
+   --------------------------------- */
+#cta {
+  min-height: 250px;
+  background: url('../images/call-to-action.jpg') center center / cover no-repeat;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  padding: 3em 1.5em;
+}
+
+#cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#cta > * {
+  position: relative;
+  z-index: 1;
+}
+
+#cta h2 {
+  color: #fff;
+  font-size: 1.4em;
+  margin-bottom: 1em;
+}
+
+
+/* ---------------------------------
+   CONTENU 2 — 6 icônes avec hover
+   Grille 2 colonnes : icône | titre / texte
+   --------------------------------- */
+#contenu2 article {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 1em;
+  align-items: start;
+  padding: 1.5em 1em;
+}
+
+/* Colonne 1, rangée 1 : icône */
+#contenu2 article i {
+  font-size: 2em;
+  color: var(--color-primary);
+  display: block;
+  grid-column: 1;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Colonne 2, rangée 2 : texte (colonne 1 reste vide) */
+#contenu2 article p {
+  grid-column: 2;
+}
+
+#contenu2 article:hover i {
+  color: var(--color-accent);
+  transform: scale(1.2) rotate(5deg);
+}
+
+
+/* ---------------------------------
+   SPLIT — image ronde + texte en colonne
+   --------------------------------- */
+#split {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: var(--gap, 1.5em);
+  align-items: center;
+}
+
+#split figure {
+  align-self: center;
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+#split figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#split div {
+  padding: 1.5em 0;
+  text-align: center;
+}
+
+#split h2 {
+  margin-bottom: 1em;
+}
+
+
+/* =================================
+   FOOTER
+   ================================= */
+footer {
+  background: var(--color-primary);
+  color: #ccc;
+  padding: 3em 1.5em 1.5em;
+}
+
+footer h3 {
+  color: #fff;
+  margin-bottom: 1em;
+}
+
+/* 2 blocs texte côte à côte sur grille 4 colonnes mobile */
+.footer-texte {
+  margin-top: 2em;
+  grid-column: span 2;
+}
+
+.footer-texte p {
+  color: #aaa;
+}
+
+/* Réseaux sociaux — centré mobile */
+#footerSocial {
+  text-align: center;
+}
+
+nav#navfootersocial ul {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  gap: 1.2em;
+  list-style: none;
+  margin-top: 1.5em;
+}
+
+nav#navfootersocial li a {
+  color: #aaa;
+  font-size: 1.4em;
+  transition: color 0.3s ease;
+}
+
+nav#navfootersocial li a:hover {
+  color: var(--color-accent);
+}
+
+/* Newsletter — centré mobile */
+#footerNewsletter {
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+#footerNewsletter form {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.8em;
+}
+
+#footerNewsletter label {
+  display: block;
+  font-size: 0.85em;
+  margin-bottom: 0.3em;
+  color: #aaa;
+}
+
+#footerNewsletter input[type="email"] {
+  width: 100%;
+  padding: 0.6em 1em;
+  border: 1px solid #555;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 0.9em;
+}
+
+#footerNewsletter input[type="email"]::placeholder {
+  color: #888;
+}
+
+/* Mentions légales */
+footer > p {
+  font-size: 0.75em;
+  color: #666;
+  text-align: center;
+  margin-top: 2em;
+  padding-top: 1.5em;
+  border-top: 1px solid #444;
+}
+
+
+/* =================================
+   COMPOSANTS
+   ================================= */
+
+/* Texte accessible masqué visuellement */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+/* Bouton principal */
+.btn {
+  display: inline-block;
+  background: var(--color-accent);
+  color: #fff;
+  padding: 0.75em 2em;
+  font-size: 0.9em;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: background 0.3s ease;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.btn:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+/* Champ requis — astérisque avant le label */
+label:has(+ :required)::before {
+  content: '* ';
+  color: var(--color-accent);
+}
+
+
+/* =================================
+   ANIMATIONS
+   ================================= */
+
+/* Pulse glow — bouton CTA hero */
+@keyframes ctaPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.5);
+  }
+
+  50% {
+    box-shadow: 0 0 0 12px rgba(255, 255, 255, 0);
+  }
+}

@@ -1,0 +1,217 @@
+/* =================================
+   MEDIUM — tablette 681px et plus
+   S'applique via media="screen and (min-width: 681px)"
+   Écrase small.css à partir de 681px.
+   ================================= */
+
+@media screen and (min-width: 681px) {
+
+  /* ---------------------------------
+     Variables
+     --------------------------------- */
+  :root {
+    --padding-section: 4em 2em;
+  }
+
+
+  /* ---------------------------------
+     MICRO GRID — 12 colonnes
+     --------------------------------- */
+  .grid {
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  .grid > * {
+    grid-column: 1 / -1;
+  }
+
+  .col-m-1 {
+    grid-column: span 1;
+  }
+
+  .col-m-2 {
+    grid-column: span 2;
+  }
+
+  .col-m-3 {
+    grid-column: span 3;
+  }
+
+  .col-m-4 {
+    grid-column: span 4;
+  }
+
+  .col-m-5 {
+    grid-column: span 5;
+  }
+
+  .col-m-6 {
+    grid-column: span 6;
+  }
+
+  .col-m-7 {
+    grid-column: span 7;
+  }
+
+  .col-m-8 {
+    grid-column: span 8;
+  }
+
+  .col-m-9 {
+    grid-column: span 9;
+  }
+
+  .col-m-10 {
+    grid-column: span 10;
+  }
+
+  .col-m-11 {
+    grid-column: span 11;
+  }
+
+  .col-m-12 {
+    grid-column: span 12;
+  }
+
+
+  /* ---------------------------------
+     TYPOGRAPHIE
+     --------------------------------- */
+  h1 {
+    font-size: 2.4em;
+  }
+
+  h2 {
+    font-size: 1.8em;
+  }
+
+  h3 {
+    font-size: 1.25em;
+  }
+
+  p {
+    font-size: 1em;
+  }
+
+
+  /* ---------------------------------
+     HEADER tablette — burger masqué, nav horizontale
+     --------------------------------- */
+  #burger {
+    display: none;
+  }
+
+  /* Nav toujours visible en horizontal */
+  nav#navprinc {
+    display: flex;
+    order: 0;
+    margin-top: 0;
+    width: auto;
+    background: transparent;
+    padding: 0;
+  }
+
+  nav#navprinc ul {
+    flex-flow: row wrap;
+    align-items: center;
+    gap: 1.5em;
+  }
+
+  nav#navprinc li a {
+    font-size: 1em;
+    transition: color 0.3s ease, letter-spacing 0.3s ease;
+  }
+
+  nav#navprinc li a:hover {
+    letter-spacing: 0.15em;
+  }
+
+  /* Logo pleine largeur, nav s'empile en dessous */
+  header {
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 1.5em;
+    gap: 1.5em;
+  }
+
+  /* Logo centré tablette */
+  #logo {
+    margin-top: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  #logo img {
+    max-height: 70px;
+    margin: 0 auto;
+  }
+
+
+  /* ---------------------------------
+     Accroche hero tablette
+     --------------------------------- */
+  #accroche {
+    top: 55%;
+    width: 75%;
+  }
+
+  #accroche h1 {
+    font-size: 2.1em;
+  }
+
+  /* 3 blocs en ligne tablette+ */
+  .hero-blocs {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+
+  /* ---------------------------------
+     Galerie tablette
+     --------------------------------- */
+  #galerie img {
+    height: 220px;
+  }
+
+
+  /* ---------------------------------
+     Split tablette — figure plus grande
+     --------------------------------- */
+  #split figure {
+    width: 200px;
+    height: 200px;
+  }
+
+
+  /* ---------------------------------
+     Footer tablette
+     --------------------------------- */
+  #footerNewsletter form {
+    flex-flow: row wrap;
+    align-items: flex-end;
+  }
+
+  #footerNewsletter input[type="email"] {
+    width: 240px;
+  }
+
+  /* Réinitialise le centrage mobile */
+  #footerNewsletter {
+    max-width: none;
+    text-align: left;
+  }
+
+  .footer-texte {
+    margin-top: 0;
+  }
+
+  /* Réseaux sociaux — 2 rangées × 3 icônes */
+  nav#navfootersocial ul {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: start;
+    gap: 1em;
+    margin-top: 1.5em;
+  }
+
+} /* fin @media 681px */
